@@ -19,7 +19,7 @@ public class MessageController {
     }
 
     @GetMapping("/message")
-    public ResponseEntity<Response> sendMessage(@RequestBody String message){
-        return ResponseEntity.ok(chatService.chat(message));
+    public ResponseEntity<String> sendMessage(@RequestBody String message){
+        return ResponseEntity.ok(chatService.chatWithOptions(message));
     }
 }

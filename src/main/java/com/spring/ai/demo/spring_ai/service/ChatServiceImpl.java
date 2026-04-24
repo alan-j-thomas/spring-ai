@@ -3,6 +3,7 @@ package com.spring.ai.demo.spring_ai.service;
 import com.spring.ai.demo.spring_ai.entity.Response;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +34,23 @@ public class ChatServiceImpl implements ChatService{
         return chatClient.prompt(prompt)
                 .call()
                 .entity(Response.class);
+    }
+
+    @Override
+    public String chatWithOptions(String query) {
+        /* PROMPT SPECIFIC OPTIONS
+        Prompt prompt = new Prompt(query, OpenAiChatOptions.builder()
+                .temperature(0.7)
+                .model("gpt-4o-mini")
+                .build());
+
+                (INSTEAD ADD THOSE OPTIONS DIRECTLY TO CHAT CLIENT)
+        */
+
+        Prompt prompt = new Prompt(query);
+
+        return chatClient.prompt(prompt)
+                .call()
+                .content();
     }
 }
